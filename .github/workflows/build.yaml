@@ -7,11 +7,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Visual Studio
         uses: ilammy/msvc-dev-cmd@v1
       - name: Setup Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           architecture: "x64"
@@ -23,8 +23,8 @@ jobs:
       - name: Build executable
         shell: powershell
         run: >
-          python -OO -m nuitka --standalone --onefile --python-flag=-OO --assume-yes-for-downloads --static-libpython=auto --windows-disable-console --windows-icon-from-ico=resources/subassistant.ico --windows-product-name=SubAssistant --windows-company-name=naghim --windows-file-version=1.0.0.0 --windows-file-description=SubAssistant --enable-plugin=pyside6 -o SubAssistant.exe subassistant/__main__.py
-      - uses: actions/upload-artifact@v3
+          python -OO -m nuitka --standalone --onefile --python-flag=-OO --assume-yes-for-downloads --static-libpython=auto --include-data-dir=subassistant/resources=resources --windows-disable-console --windows-icon-from-ico=subassistant/resources/subassistant.ico --windows-product-name=SubAssistant --windows-company-name=naghim --windows-file-version=1.0.0.0 --windows-file-description=SubAssistant --enable-plugin=pyside6 -o SubAssistant.exe subassistant/__main__.py
+      - uses: actions/upload-artifact@v4
         with:
           name: SubAssistant
           path: SubAssistant.exe
