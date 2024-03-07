@@ -1,0 +1,55 @@
+#FileChooserButton {
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+}
+
+#Action_btn {
+  background-color: #d9073f;
+  border: none;
+  font-weight: bold;
+  color: #f5f5ff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+}
+
+#Label_txt {
+  color: #333;
+  font-size: 16px;
+}
+
+#Label_txt_bold {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#Label_txt_bold_mini {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#LineEdit {
+  border: 2px solid #e9e9e9;
+  border-radius: 8px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #ffffff;
+}
+
+#About_txt {
+  color: #333;
+  font-size: 16px;
+  text-align: justify;
+}
