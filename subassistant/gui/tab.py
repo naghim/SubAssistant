@@ -1,5 +1,7 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QFileDialog, QHBoxLayout, QLineEdit, QScrollArea, QMessageBox
+from PySide6.QtGui import QColor
 from subassistant.logic.logic import RemoveComments, CommentDialogue
+from subassistant.gui import util
 import os
 
 class BaseSubtitleUI(QWidget):
@@ -8,18 +10,18 @@ class BaseSubtitleUI(QWidget):
 
         self.layout = QVBoxLayout()
         self.window_title = QLabel(self.TAB_TITLE)
-        self.window_title.setObjectName("Label_txt_bold") 
+        self.window_title.setObjectName("Label_txt_bold")
         self.layout.addWidget(self.window_title)
 
         self.input_file_label = QLabel("Select Input File:")
-        self.input_file_label.setObjectName("Label_txt") 
+        self.input_file_label.setObjectName("Label_txt")
         self.layout.addWidget(self.input_file_label)
 
         self.input_file_line_edit = QLineEdit()
         self.input_file_line_edit.setReadOnly(True)
         self.input_file_line_edit.setObjectName("LineEdit")
 
-        self.input_btn = QPushButton("Browse", clicked=self.get_file) 
+        self.input_btn = QPushButton("Browse", clicked=self.get_file)
         self.input_btn.setObjectName("FileChooserButton")
 
         input_file_layout = QHBoxLayout()
@@ -47,6 +49,7 @@ class BaseSubtitleUI(QWidget):
         self.action_button.setObjectName("Action_btn")
         self.action_button.clicked.connect(lambda: self.process_file(self.ACTION_CLASS))
 
+        util.apply_background_color(self, QColor(249, 249, 249))
         self.layout.addWidget(self.action_button)
         self.setLayout(self.layout)
 
@@ -82,17 +85,17 @@ class BaseSubtitleUI(QWidget):
     def process_file(self, action_class):
         input_file = self.input_file_line_edit.text()
         output_folder = self.output_file_line_edit.text()
-        
+
         if not input_file:
             QMessageBox.warning(self, "Warning", "Please select a file to process.")
             return
-    
+
         if not output_folder:
             QMessageBox.warning(self, "Warning", "Please select an output folder.")
             return
-    
+
         output_file = self.get_output_file(output_folder)
-        
+
         try:
             action_class(input_file, output_file).process_file()
             QMessageBox.information(self, "Success", f'File processed successfully.\nOutput file: {output_file}')
@@ -118,14 +121,14 @@ class AboutTab(QWidget):
 
     def initUI(self):
         self.layout = QVBoxLayout()
-        
+
         self.content_widget = QWidget()
         self.content_layout = QVBoxLayout()
 
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
         scroll_area.setWidget(self.content_widget)
-        
+        util.apply_background_color(self.content_widget, QColor(249, 249, 249))
         self.layout.addWidget(scroll_area)
 
 
@@ -148,10 +151,12 @@ class AboutTab(QWidget):
         self.text_how_to.setObjectName("About_txt")
         self.text_slogan.setObjectName("Label_txt_bold_mini")
         self.text_logo.setObjectName("Label_txt_bold")
+        self.content_widget.setStyleSheet("background-color: #f0f0f0")
         self.content_layout.addWidget(self.text_logo)
         self.content_layout.addWidget(self.text_how_to)
         self.content_layout.addWidget(self.text)
         self.content_layout.addWidget(self.text_slogan)
         self.content_widget.setLayout(self.content_layout)
-        
+
+        util.apply_background_color(self, QColor(249, 249, 249))
         self.setLayout(self.layout)
