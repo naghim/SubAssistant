@@ -3,7 +3,7 @@
 <p align='justify'>This is a specialized desktop application designed to simplify the translation process for subtitle files, specifically for the <code>.ass</code> (Advanced SubStation Alpha) format. Tailored for translators, SubAssistant facilitates seamless collaboration by allowing users to comment out the original  dialogue text, write their translations alongside it, and enable proofreaders or quality checkers to review both versions within the same file. Users also have the possibilitiy to delete the commented out texts, doing so the application enhances the efficiency and accuracy of subtitle translation workflows.</p>
 
 <p align="center">
-  <img width="400" src="https://i.imgur.com/vvzOFnF.png"" alt="SubAssistant screenshot"/>
+  <img width="500" src="https://i.imgur.com/vvzOFnF.png"" alt="SubAssistant screenshot"/>
 </p>
 
 ## Installation
