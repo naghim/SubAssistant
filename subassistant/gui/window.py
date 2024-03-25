@@ -25,7 +25,7 @@ class SubAssistantWindow(QWidget):
         self.tab_widget.addTab(AboutTab(), QIcon(os.path.join(RESOURCES_DIR, 'about.png')), "")
 
         self.tab_widget.setObjectName("TabWidget")
-        self.tab_widget.setStyleSheet("QTabBar::tab { height: 60px; width: 100px; background-color: #f3f3f3; border: 1px solid #e8e8e8; } QTabBar::tab:selected { background-color: #f9f9f9; }")
+        self.tab_widget.setStyleSheet("QTabBar::tab { height: 60px; width: 100px; background-color: #f3f3f3; border: 1px solid #e8e8e8; padding-top: -22px; padding-bottom: 22px; } QTabBar::tab:selected { background-color: #f9f9f9; }")
         layout.addWidget(self.tab_widget)
 
         self.setLayout(layout)

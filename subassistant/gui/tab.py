@@ -151,7 +151,7 @@ class AboutTab(QWidget):
         self.text_how_to.setObjectName("About_txt")
         self.text_slogan.setObjectName("Label_txt_bold_mini")
         self.text_logo.setObjectName("Label_txt_bold")
-        self.content_widget.setStyleSheet("background-color: white")
+        self.content_widget.setStyleSheet("background-color: #f0f0f0")
         self.content_layout.addWidget(self.text_logo)
         self.content_layout.addWidget(self.text_how_to)
         self.content_layout.addWidget(self.text)
