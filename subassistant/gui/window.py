@@ -1,7 +1,7 @@
 from PySide6.QtGui import QIcon, QColor
 from PySide6.QtWidgets import QTabWidget, QWidget, QVBoxLayout
 from subassistant.globals import RESOURCES_DIR
-from subassistant.gui.tab import CommentTab, RemoveCommentTab, AboutTab
+from subassistant.gui.tab import CommentTab, RemoveCommentTab, FontCheckerTab, AboutTab
 from subassistant.gui import util
 import os
 
@@ -22,6 +22,7 @@ class SubAssistantWindow(QWidget):
 
         self.tab_widget.addTab(CommentTab(), QIcon(os.path.join(RESOURCES_DIR, 'curly_braces.png')), "")
         self.tab_widget.addTab(RemoveCommentTab(), QIcon(os.path.join(RESOURCES_DIR, 'no_curly_braces.png')), "")
+        self.tab_widget.addTab(FontCheckerTab(), QIcon(os.path.join(RESOURCES_DIR, 'font_icon.png')), "")
         self.tab_widget.addTab(AboutTab(), QIcon(os.path.join(RESOURCES_DIR, 'about.png')), "")
 
         self.tab_widget.setObjectName("TabWidget")
