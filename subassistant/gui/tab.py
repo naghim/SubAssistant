@@ -1,9 +1,9 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QFileDialog, QHBoxLayout, QLineEdit, QScrollArea, QMessageBox, QTableWidget, QHeaderView, QTableWidgetItem, QCheckBox
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QFileDialog, QHBoxLayout, QLineEdit, QScrollArea, QMessageBox, QTableWidget, QHeaderView, QTableWidgetItem, QCheckBox, QAbstractItemView
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QColor
 from subassistant.logic.logic import RemoveComments, CommentDialogue
 from subassistant.gui import util
-from subassistant.logic.fonts import copy, font, subtitle, windows
+from subassistant.logic.fonts import copy, font, fontfinder, subtitle
 import os
 
 class BaseSubtitleUI(QWidget):
@@ -116,7 +116,6 @@ class RemoveCommentTab(BaseSubtitleUI):
     ACTION_CLASS = RemoveComments
 
 
-
 class FontCheckerTab(QWidget):
     TAB_TITLE = "Font Checker"
 
@@ -145,7 +144,6 @@ class FontCheckerTab(QWidget):
         self.subtitle_layout.addWidget(self.input_btn)
 
         self.layout.addLayout(self.subtitle_layout)
-
         
         self.table_widget = QTableWidget()
         self.table_widget.setColumnCount(3)
@@ -154,10 +152,59 @@ class FontCheckerTab(QWidget):
         self.table_widget.horizontalHeader().setSectionResizeMode(2, QHeaderView.Stretch)
         self.table_widget.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.table_widget.setObjectName("TableWidget")
-        self.table_widget.setStyleSheet("QTableWidget#TableWidget {"
-            "border: 1px solid #dcdcdc;"
-            "border-radius: 5px;"
-        "}")
+
+        # No selection, no focus, no editing
+        self.table_widget.setSelectionMode(QAbstractItemView.NoSelection)
+        self.table_widget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.table_widget.setFocusPolicy(Qt.NoFocus)
+
+        self.table_widget.setStyleSheet("""
+    /* Main table styling */
+    QTableWidget {
+        border: 1px solid #dcdcdc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        color: #333;
+        font-size: 16px;
+        gridline-color: #ddd;
+    }
+
+    /* Header styling */
+    QHeaderView::section {
+        background-color: #333; /* Header background color */
+        color: white;
+        padding: 8px;
+        border: none;
+        font-weight: bold;
+        font-size: 12px;
+        border-right: 1px solid #e0e0e0; /* Optional divider */
+    }
+    
+    /* Body row styling */
+    QTableWidget::item {
+        padding: 12px;
+        border-bottom: 1px solid #ddd; /* Subtle border between rows */
+    }
+
+    /* Vertical and horizontal scrollbars */
+    QScrollBar:vertical {
+        border: none;
+        background: #f1f1f1;
+        width: 10px;
+        margin: 22px 0 22px 0;
+    }
+    QScrollBar::handle:vertical {
+        background: #333;
+        min-height: 20px;
+        border-radius: 5px;
+    }
+    
+    /* Absolutely no pink lines!! */
+    QTableWidget::item:focus {
+        outline: none;
+    }
+""")
+
         self.layout.addWidget(self.table_widget)
 
         self.button_widget = QWidget()
@@ -225,7 +272,7 @@ class FontCheckerTab(QWidget):
         self.check_button.setEnabled(False)
 
         # First, find all installed fonts...
-        installed_font_ttfs = windows.find_installed_ttfs()
+        installed_font_ttfs = fontfinder.find_installed_ttfs()
 
         # Second, find the font names of all installed fonts...
         installed_fonts = {}
